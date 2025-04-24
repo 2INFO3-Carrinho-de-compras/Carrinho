@@ -11,7 +11,7 @@
     </p>       
     <input type="text" class="pesquisa" placeholder="Pesquisar" >     
     <div class="topo">       
-        <ul>           
+        <ul class="botoes">           
             <li>             
                 <a href="Termos">Termos</a>           
             </li>            
@@ -23,12 +23,14 @@
             </li>            
             <li>             
                 <a href="Devoluções">Devoluções</a>           
+            </li>
+        </ul>
+        <ul class="icones">            
+            <li>             
+                <a class="fa-solid fa-square-plus"></a>           
             </li>            
             <li>             
-                <i class="fa-solid fa-square-plus"></i>           
-            </li>            
-            <li>             
-                <i class="fa-solid fa-heart"></i>           
+                <i class="fa-solid fa-heart"></i>            
             </li>            
             <li>             
                 <i class="fa-solid fa-user"></i>           
@@ -64,36 +66,56 @@ header {
 } 
 h1{   
     padding: 0 10px 0 0;   
-    font-size: 1vw;   
-    margin: 0.9vw 0 0.9vw 8vw; 
+    font-size: 1.5vw;   
+    margin: 1.5vw 0 1.5vw 8vw;
+    color: black; 
 } 
 header input{   
-    border-radius: 5px;   
-    border: none;   
+    border-radius: 2px;   
+    border: none; 
     background-color: rgb(235, 235, 235);   
-    padding: 0 10vw 0 1vw;   
-    margin: 0.9vw 0 0.9vw 0; 
+    padding: 0 12vw 0 1vw;   
+    margin: 1.5vw 0 1.5vw 0; 
 } 
-div.topo ul{   
-    display: flex;   
-    padding: 1vw 0 0 0; 
+div.topo{
+    display: flex;
+}
+div.topo ul.botoes{   
+    display: flex;
 } 
-div.topo ul li {   
-    margin: 0 3vw 0 0;   
+div.topo ul.icones{   
+    display: flex;
+} 
+div.topo ul.botoes li {   
+    margin: 1.7vw 2vw 1vw 1vw;   
     list-style: none; 
+}
+.icones li{
+    margin: 1.7vw 1vw 1vw 0;   
+    list-style: none; 
+}
+.icones li i{
+    border-left:2px solid rgb(76, 196, 76);
+    color: rgb(76, 196, 76);
+    font-size: 1.3vw;
+    padding: 0 0 0 20px;
+} 
+.icones li a{
+    color: rgb(76, 196, 76);
+    font-size: 1.3vw;
 } 
 header p {   
     display: flex;   
     margin: 1vw 0 0 0; 
 } 
 a {   
-    color: black;   
+    color: gray;   
     text-decoration: none; 
 } 
 header p.titulo{   
     padding: 0 0 0 10px;   
-    font-size: 0.7vw;   
-    margin: 0.9vw 8vw 0.9vw 0;   
+    font-size: 1vw;   
+    margin: 1vw 8vw 1vw 0;   
     color: rgb(76, 196, 76);   
     border-left:2px solid rgb(76, 196, 76); 
 } 
