@@ -2,55 +2,11 @@
 </script>
 
 <template>
-  <header>
-    <h1>
-  IFbooks
- </h1>
-    <p class="pesquisar">
-      Pesquisar
-    </p>
- <div class="topo">
-<ul>
-    <li>
-      <a href="Termos">Termos</a>
-    </li>
-
-    <li>
-      <a href="Equipe">Equipe</a>
-    </li>
-
-    <li>
-      <a href="Envio">Envio</a>
-    </li>
-
-    <li>
-      <a href="Devoluções">Devoluções</a>
-    </li>
-
-    <li>
-      <i class="fa-solid fa-square-plus"></i>
-    </li>
-    <hr>
-
-    <li>
-      <i class="fa-solid fa-heart"></i>
-    </li>
-    <hr>
-
-    <li>
-      <i class="fa-solid fa-user"></i>
-    </li>
-</ul>
- </div>
-</header>
-
-<hr>
 <main>
   <section>
     <div class="conteudo">
       <button class="autor"> Autor de Abril </button>
-        
-      
+
       <h2>
         Eric-Emanuel Schmitt
       </h2>
@@ -62,9 +18,7 @@
     </div>
 
     <div class="foto">
-
-      <img public="img/lamina_da.jpg" width="400" height="435">
-
+      <img src="/public/img/capa.jpeg" alt="capa" width="470" height="620">
     </div>
 
   </section>
@@ -73,18 +27,17 @@
 
   <section class="opcoes">
     <div>
-      <p><i class="fa-solid fa-truck-medical"></i> Frete grátis para SC</p>
-      
-    </div>
-    <hr>
-    <div>
-      <p> <i class="fa-solid fa-star"></i> Livros recomendados</p>
+      <img src="/public/img/caminhao.png" alt="caminhao" width="50" height="45"> <p>Frete grátis para SC</p>
 
     </div>
     <hr>
     <div>
-      <p><i class="fa-solid fa-book-open"></i> Mais vendidos</p>
+      <img src="/public/img/estrela.png" alt="estrela" width="50" height="45"> <p>Livros recomendados</p>
 
+    </div>
+    <hr>
+    <div>
+      <img src="/public/img/livro.png" alt="livro" width="50" height="45"> <p>Mais vendidos</p>
     </div>
 
   </section>
@@ -95,65 +48,40 @@
 </template>
 
 <style scoped>
-header {
-  display: flex;
-  justify-content: space-around;
-}
-p.pesquisar {
-  background-color: gray;
-  color: rgb(90, 87, 87);
-}
-div.topo ul{
-  display: flex;
-  padding: 1vw 0 0 0;
-}
-div.topo ul li {
-  margin: 0 3vw 0 0;
-  list-style: none;
-}
-header p {
-  display: flex;
-  margin: 1vw 25vw 0 0;
-}
-a {
-  color: black;
-  text-decoration: none;
-}
-div.topo ul hr{
-  margin: 0 0.5vw 0 0.5vw;
-}
 hr {
-  border-color: rgb(194, 28, 194);
+  border-color: rgb(211, 34, 137);
 }
 i {
-  color: rgb(194, 28, 194);
+  color: rgb(211, 34, 137);
 }
-
-
  section {
   display: flex;
   justify-content: space-around;
-  
 }
 section div.conteudo button.autor {
-  margin: 10vw 0 3.5vw 0;
-  padding: 0.7vw ;
-  border-color: rgb(194, 28, 194);
+  font-size: 0.8vw;
+  margin: 10vw 0 2.7vw 0;
+  padding: 0.7vw;
+  border-color: rgb(211, 34, 137);
   background-color: white;
-  color: rgb(194, 28, 194);
+  color: rgb(211, 34, 137);
 }
 section div.conteudo h2 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: black;
   margin: 0 0 2vw 0;
 }
+.conteudo p{
+  font-size: 1.2vw;
+}
 section div.conteudo button.pagina {
   margin: 3.5vw 0 0 0;
   font-size: 1.2vw;
+  border: none;
   border-radius: 0.5vw;
   padding: 1vw 2vw 1vw 2vw ;
-  background: linear-gradient(rgb(137, 13, 141) , rgb(194, 28, 194));
+  background: linear-gradient(rgb(211, 34, 137) , rgb(212, 71, 154));
   color: white;
 }
 section div.foto {
@@ -169,5 +97,15 @@ section.opcoes {
 }
 section.opcoes hr {
   margin: -1vw;
+}
+section.opcoes p {
+  font-size: 1.5vw;
+  margin: 0 1vw 0 0;
+}
+.opcoes div{
+  display: flex;
+}
+.opcoes div img{
+  margin: 0 2vw 0 0;
 }
 </style>
