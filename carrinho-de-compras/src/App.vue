@@ -1,4 +1,41 @@
 <script setup>
+const produtos = [
+    {
+        id: 1,
+        titulo: 'lamina da assassina',
+        autor: 'Sarah.J.Mass',
+        preco: 'R$',
+        capa: 'https://placehold.co/600x400.png',
+    },
+    {
+        id: 2,
+        titulo: 'Trono de Vidro',
+        autor: 'autor 2',
+        preco: 'R$99',
+        capa: 'https://placehold.co/600x400.png',
+    },
+    {
+        id: 3,
+        titulo: 'Coroa da Meia-Noite',
+        autor: 'autor 3',
+        preco: 9.9,
+        capa: 'https://placehold.co/600x400.png',
+    },
+    {
+        id: 4,
+        titulo: 'Herdeira do Fogo',
+        autor: 'autor 4',
+        preco: 199.9,
+        capa: 'https://placehold.co/600x400.png',
+    },
+    {
+        id: 5,
+        titulo:'Rainha das Sombras',
+        autor: 'autor 5',
+        preco: 29.9,
+        capa: 'https://placehold.co/600x400.png',
+    }
+];
 </script>
 
 <template>
@@ -44,7 +81,21 @@
     <hr>
  </main>
 
+ <section class="prdutos">
+      <ul>
+    <li v-for="lamina in produtos" :key="lamina.id">
+      <p>titulo: {{ lamina.titulo }}</p>
+      <p v-for="sarah in produtos" :key="sarah.id">
+      </p>
+      <p> autor: {{ lamina.autor }}</p>
+      <p v-for="Rs in produtos" :key="Rs.id">
+      </p>
+      <p>preco: {{ R$preco }}</p>
+    </li>
 
+    </ul>
+
+    </section>
 </template>
 
 <style scoped>
