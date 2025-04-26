@@ -5,36 +5,60 @@ const produtos = [
         titulo: 'lamina da assassina',
         autor: 'Sarah.J.Mass',
         preco: 'R$',
-        capa: 'https://placehold.co/600x400.png',
+        capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/7-1.jpg',
     },
     {
         id: 2,
         titulo: 'Trono de Vidro',
-        autor: 'autor 2',
+        autor: 'Sarah.J.Mass',
         preco: 'R$99',
-        capa: 'https://placehold.co/600x400.png',
+        capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/81yjssr1ibl.jpg',
     },
     {
         id: 3,
         titulo: 'Coroa da Meia-Noite',
-        autor: 'autor 3',
+        autor: 'Sarah.J.Mass',
         preco: 9.9,
-        capa: 'https://placehold.co/600x400.png',
+        capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/81zha4ugo0l.jpg',
     },
     {
         id: 4,
         titulo: 'Herdeira do Fogo',
-        autor: 'autor 4',
+        autor: 'Sarah.J.Mass',
         preco: 199.9,
-        capa: 'https://placehold.co/600x400.png',
+        capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/815ugbyzn2l.jpg',
     },
     {
         id: 5,
         titulo:'Rainha das Sombras',
-        autor: 'autor 5',
+        autor: 'Sarah.J.Mass',
         preco: 29.9,
-        capa: 'https://placehold.co/600x400.png',
-    }
+        capa: 'https://m.media-amazon.com/images/I/81xKVoXj2jL._SY385_.jpg',
+    },
+    {
+        id: 6,
+        titulo:'Império de Tempestades',
+        autor: 'Sarah.J.Mass',
+        preco: 29.4,
+        capa: 'https://photos.enjoei.com.br/livro-imperio-de-tempestades-edicao-de-luxo-sarah-j-maas-trono-de-vidro-120875157/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzkwMTUwNy80ZWM2YjQwZGIwOTRlMTkyYmVkYzQ5N2RmZGI4N2M1OC5qcGc',
+    },
+    {
+        id: 7,
+        titulo:'Torre do alvorecer',
+        autor: 'Sarah.J.Mass',
+        preco: 29.2,
+        capa: 'https://http2.mlstatic.com/D_NQ_NP_2X_637631-MLU77441655237_072024-F.webp',
+    },
+    {
+        id: 8,
+        titulo: 'Reino de Cinzas',
+        autor: 'Sarah.J.Mass',
+        preco: 56,
+        capa: 'https://img.travessa.com.br/livro/GR/b2/b2696057-9310-4581-8a64-e060625ee84f.jpg',
+    },
+
+
+    
 ];
 </script>
 
@@ -45,10 +69,11 @@ const produtos = [
       <button class="autor"> Autor de Abril </button>
 
       <h2>
-        Eric-Emanuel Schmitt
+        Corte de Névoa e Fúria
       </h2>
       <p>
-        Eric-Emmanuel Schmitt has been awarded more than 20 <br> literary prizes and distinctions, and in 2001 he received the <br> title of Chevalier des Arts et des Lettres. His books have been <br> translated into over 40 languages.
+        Após resgatar o seu amado Tamlin do reinado da rainha Amaratha, Feyre regressa <br> a Corte Primaveril com os poderes de todos grão-senhores. Mas esquecer os crimes <br> que teve que cometer para salvar o povo de Tamlin, se tornou impossível. Entretanto, <br> uma guerra iminente aproxima-se e um mal muito mais perigoso, que com o tempo <br> provará que 50 anos do reinado de Amaratha, torturas e terror, escravidão e medo, <br> eram apenas uma brincadeira de criança… Apenas um mísero teste e prova do que eles <br> eram capazes e podiam fazer se desejassem.   
+
       </p>
 
       <button class="pagina"> Acessar página do livro </button>
@@ -81,16 +106,21 @@ const produtos = [
     <hr>
  </main>
 
- <section class="prdutos">
-      <ul>
+ <section class="produtos">
+    
+    <ul>
     <li v-for="lamina in produtos" :key="lamina.id">
-      <p>titulo: {{ lamina.titulo }}</p>
+        <p v-for="imagem in produtos" :key="imagem.id"></p>
+      <p> <img :src="lamina.capa" alt="" width="200" height="200" ></p>
+      <p> {{ capa }}</p>
+      <p> {{ lamina.titulo }}</p>
       <p v-for="sarah in produtos" :key="sarah.id">
       </p>
-      <p> autor: {{ lamina.autor }}</p>
-      <p v-for="Rs in produtos" :key="Rs.id">
+      <p> {{ lamina.autor }}</p>
+      <p v-for="numero in produtos" :key="numero.id">
       </p>
-      <p>preco: {{ R$preco }}</p>
+      <p> {{ lamina.preco }}</p>
+     
     </li>
 
     </ul>
