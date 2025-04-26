@@ -9,7 +9,14 @@
     <p class="titulo">
         Apreço a <br> leitura
     </p>
-    <input type="text" class="pesquisa" placeholder="Pesquisar" >
+
+    <div class="pesquisa">
+       <input type="text" class="pesquisa" placeholder="Pesquisar" >
+       <a class="lupa">
+        <img src="/public/img/icon.png" alt="lupa">
+       </a>
+    </div>
+    
     <div class="topo">
         <ul class="botoes">
             <li>
@@ -43,7 +50,7 @@
 <style scoped>
 header {
     display: flex;
-    border-bottom:2px solid rgb(76, 196, 76);
+    border-bottom:2px solid rgb(211, 34, 137);
 }
 h1{
     padding: 0 10px 0 0;
@@ -51,12 +58,19 @@ h1{
     margin: 1.5vw 0 1.5vw 8vw;
     color: black;
 }
-header input{
-    border-radius: 2px;
+.pesquisa{
+    display: flex;
+    border-radius: 20px;
     border: none;
-    background-color: rgb(235, 235, 235);
-    padding: 0 12vw 0 1vw;
-    margin: 1.5vw 0 1.5vw 0;
+    background-color: rgb(252, 225, 240);
+    margin: 1vw;
+}
+.pesquisa input{
+    padding: 5px 10vw 5px 1vw;
+}
+.pesquisa a.lupa{
+  padding: 3px 1vw 0 0;
+  margin: 1vw 0 1vw 0;
 }
 div.topo{
     display: flex;
@@ -68,21 +82,21 @@ div.topo ul.icones{
     display: flex;
 }
 div.topo ul.botoes li {
-    margin: 1.7vw 2vw 1vw 1vw;
+    margin: 2vw 2vw 1vw 1vw;
     list-style: none;
 }
 .icones li{
-    margin: 1.7vw 1vw 1vw 0;
+    margin: 2vw 1vw 1vw 0;
     list-style: none;
 }
 .icones li i{
-    border-left:2px solid rgb(76, 196, 76);
-    color: rgb(76, 196, 76);
+    border-left:2px solid rgb(211, 34, 137);
+    color: rgb(211, 34, 137);
     font-size: 1.3vw;
     padding: 0 0 0 20px;
 }
 .icones li a{
-    color: rgb(76, 196, 76);
+    color: rgb(211, 34, 137);
     font-size: 1.3vw;
 }
 header p {
@@ -96,8 +110,8 @@ a {
 header p.titulo{
     padding: 0 0 0 10px;
     font-size: 1vw;
-    margin: 1vw 8vw 1vw 0;
-    color: rgb(76, 196, 76);
-    border-left:2px solid rgb(76, 196, 76);
+    margin: 1.5vw 8vw 1vw 0;
+    color: rgb(211, 34, 137);
+    border-left:2px solid rgb(211, 34, 137);
 }
 </style>
