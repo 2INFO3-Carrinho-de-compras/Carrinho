@@ -58,6 +58,7 @@ const produtos = [
         capa: 'https://img.travessa.com.br/livro/GR/b2/b2696057-9310-4581-8a64-e060625ee84f.jpg',
     },
 ];
+
 </script>
 
 <template>
@@ -112,14 +113,13 @@ const produtos = [
       <p ><img :src="livro.capa" alt="" width="200" height="200" ></p>
       <p>{{ capa }}</p>
       <p class="titulo"> {{ livro.titulo }}</p>
-      <p v-for="sarah in produtos" :key="sarah.id"></p>
+      <p v-for="autora in produtos" :key="autora.id"></p>
       <p class="autor"> {{ livro.autor }}</p>
       <p v-for="numero in produtos" :key="numero.id"></p>
       <p class="preco"> {{ livro.preco }} <i class="fa-solid fa-heart"></i> </p>
       <button><a class="fa-solid fa-square-plus"></a> Comprar</button>
     </li>
     </ul>
-
     </section>
 </template>
 
@@ -184,9 +184,6 @@ section.opcoes p {
 .opcoes div img{
   margin: 0 2vw 0 0;
 }
-section.produtos h2 {
-
-}
 section.produtos ul {
     display: flex;
     flex-wrap: wrap;
@@ -224,11 +221,14 @@ section.produtos button{
   display: flex;
   justify-content: center;
   margin: 1.7vw 0 0 0;
-  padding: 0.7vw 6vw 0.7vw 5vw;
-  border-color: rgb(211, 34, 137);
+  padding: 0.7vw 6vw 0.7vw 6vw;
+  border: none;
   background: linear-gradient(rgb(211, 34, 137) , rgb(212, 71, 154));
   color: white;
-
+  border-radius: 0.5vw;
 }
-
+.produtos button a{
+  padding: 0 0.5vw 0 0;
+  font-size: 1vw;
+}
 </style>
