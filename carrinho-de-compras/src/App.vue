@@ -1,64 +1,62 @@
 <script setup>
 const produtos = [
     {
+        nome: 'livro 1',
         id: 1,
         titulo: 'lamina da assassina',
         autor: 'Sarah.J.Mass',
-        preco: 'R$',
+        preco: 'R$82,46',
         capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/7-1.jpg',
     },
     {
         id: 2,
         titulo: 'Trono de Vidro',
         autor: 'Sarah.J.Mass',
-        preco: 'R$99',
+        preco: 'R$72,44',
         capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/81yjssr1ibl.jpg',
     },
     {
         id: 3,
         titulo: 'Coroa da Meia-Noite',
         autor: 'Sarah.J.Mass',
-        preco: 9.9,
+        preco: 'R$104,93',
         capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/81zha4ugo0l.jpg',
     },
     {
         id: 4,
         titulo: 'Herdeira do Fogo',
         autor: 'Sarah.J.Mass',
-        preco: 199.9,
+        preco: 'R$84,48',
         capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/815ugbyzn2l.jpg',
     },
     {
         id: 5,
         titulo:'Rainha das Sombras',
         autor: 'Sarah.J.Mass',
-        preco: 29.9,
+        preco: 'R$113,30',
         capa: 'https://m.media-amazon.com/images/I/81xKVoXj2jL._SY385_.jpg',
     },
     {
         id: 6,
         titulo:'Império de Tempestades',
         autor: 'Sarah.J.Mass',
-        preco: 29.4,
+        preco: 'R$111,92',
         capa: 'https://photos.enjoei.com.br/livro-imperio-de-tempestades-edicao-de-luxo-sarah-j-maas-trono-de-vidro-120875157/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzkwMTUwNy80ZWM2YjQwZGIwOTRlMTkyYmVkYzQ5N2RmZGI4N2M1OC5qcGc',
     },
     {
         id: 7,
         titulo:'Torre do alvorecer',
         autor: 'Sarah.J.Mass',
-        preco: 29.2,
+        preco: 'R$89,90',
         capa: 'https://http2.mlstatic.com/D_NQ_NP_2X_637631-MLU77441655237_072024-F.webp',
     },
     {
         id: 8,
         titulo: 'Reino de Cinzas',
         autor: 'Sarah.J.Mass',
-        preco: 56,
+        preco: 'R$134,93',
         capa: 'https://img.travessa.com.br/livro/GR/b2/b2696057-9310-4581-8a64-e060625ee84f.jpg',
     },
-
-
-    
 ];
 </script>
 
@@ -72,7 +70,7 @@ const produtos = [
         Corte de Névoa e Fúria
       </h2>
       <p>
-        Após resgatar o seu amado Tamlin do reinado da rainha Amaratha, Feyre regressa <br> a Corte Primaveril com os poderes de todos grão-senhores. Mas esquecer os crimes <br> que teve que cometer para salvar o povo de Tamlin, se tornou impossível. Entretanto, <br> uma guerra iminente aproxima-se e um mal muito mais perigoso, que com o tempo <br> provará que 50 anos do reinado de Amaratha, torturas e terror, escravidão e medo, <br> eram apenas uma brincadeira de criança… Apenas um mísero teste e prova do que eles <br> eram capazes e podiam fazer se desejassem.   
+        Após resgatar o seu amado Tamlin do reinado da rainha Amaratha, Feyre regressa <br> a Corte Primaveril com os poderes de todos grão-senhores. Mas esquecer os crimes <br> que teve que cometer para salvar o povo de Tamlin, se tornou impossível. Entretanto, <br> uma guerra iminente aproxima-se e um mal muito mais perigoso o acompanha, <br> que com o tempo provará que 50 anos do reinado de Amaratha, torturas e terror, <br> escravidão e medo, eram apenas uma brincadeira de criança… Apenas um mísero <br> teste e prova do que eles eram capazes e podiam fazer se desejassem.   
 
       </p>
 
@@ -107,24 +105,21 @@ const produtos = [
  </main>
 
  <section class="produtos">
-    
-    <ul>
-    <li v-for="lamina in produtos" :key="lamina.id">
+
+    <ul >
+    <li v-for="livro in produtos" :key="livro.id">
         <p v-for="imagem in produtos" :key="imagem.id"></p>
-      <p> <img :src="lamina.capa" alt="" width="200" height="200" ></p>
-      <p> {{ capa }}</p>
-      <p> {{ lamina.titulo }}</p>
-      <p v-for="sarah in produtos" :key="sarah.id">
-      </p>
-      <p> {{ lamina.autor }}</p>
-      <p v-for="numero in produtos" :key="numero.id">
-      </p>
-      <p> {{ lamina.preco }}</p>
-     
+      <p ><img :src="livro.capa" alt="" width="200" height="200" ></p>
+      <p>{{ capa }}</p>
+      <p class="titulo"> {{ livro.titulo }}</p>
+      <p v-for="sarah in produtos" :key="sarah.id"></p>
+      <p class="autor"> {{ livro.autor }}</p>
+      <p v-for="numero in produtos" :key="numero.id"></p>
+      <p class="preco"> {{ livro.preco }} <i class="fa-solid fa-heart"></i> </p>
+      <button><a class="fa-solid fa-square-plus"></a> Comprar</button>
     </li>
-
     </ul>
-
+  
     </section>
 </template>
 
@@ -189,4 +184,49 @@ section.opcoes p {
 .opcoes div img{
   margin: 0 2vw 0 0;
 }
+section.produtos h2 {
+
+}
+section.produtos ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 2vw;
+
+}
+section.produtos li {
+  box-sizing: border-box;
+  width: 20%;
+  margin: 6vw 1vw 0 0;
+  padding: 0 1vw;
+  white-space: nowrap;
+  list-style: none;
+}
+section.produtos img {
+  width: 100;
+  height: 20vw;
+}
+section.produtos p.titulo {
+  font-size: 1.5vw;
+  color: black;
+  font-family: bold;
+}
+section.produtos p.preco {
+  font-family: bold;
+  color: black;
+}
+section.produtos p.preco i {
+  margin: 0 0 0 8.5vw;
+}
+section.produtos button{
+  display: flex;
+  justify-content: center;
+  margin: 2vw 0 0 0;
+  padding: 0.7vw 5vw 0.7vw 5vw;
+  border-color: rgb(211, 34, 137);
+  background: linear-gradient(rgb(211, 34, 137) , rgb(212, 71, 154));
+  color: white;
+
+}
+
 </style>
