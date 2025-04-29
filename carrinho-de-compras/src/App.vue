@@ -13,10 +13,10 @@
     <div class="pesquisa">
        <input type="text" class="pesquisa" placeholder="Pesquisar" >
        <a class="lupa">
-        <img src="/public/img/icon.png" alt="lupa">
+        <img src="/public/img/Icon.png" alt="lupa">
        </a>
     </div>
-    
+
     <div class="topo">
         <ul class="botoes">
             <li>
@@ -69,8 +69,8 @@ h1{
     padding: 5px 10vw 5px 1vw;
 }
 .pesquisa a.lupa{
-  padding: 3px 1vw 0 0;
-  margin: 1vw 0 1vw 0;
+  padding: 5px 1vw 0 0;
+  margin: 1.3vw 0 1vw 0;
 }
 div.topo{
     display: flex;
