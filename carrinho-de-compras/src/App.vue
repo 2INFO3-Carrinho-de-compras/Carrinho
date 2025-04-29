@@ -70,7 +70,7 @@ const produtos = [
         Corte de Névoa e Fúria
       </h2>
       <p>
-        Após resgatar o seu amado Tamlin do reinado da rainha Amaratha, Feyre regressa <br> a Corte Primaveril com os poderes de todos grão-senhores. Mas esquecer os crimes <br> que teve que cometer para salvar o povo de Tamlin, se tornou impossível. Entretanto, <br> uma guerra iminente aproxima-se e um mal muito mais perigoso o acompanha, <br> que com o tempo provará que 50 anos do reinado de Amaratha, torturas e terror, <br> escravidão e medo, eram apenas uma brincadeira de criança… Apenas um mísero <br> teste e prova do que eles eram capazes e podiam fazer se desejassem.   
+        Após resgatar o seu amado Tamlin do reinado da rainha Amaratha, Feyre regressa <br> a Corte Primaveril com os poderes de todos grão-senhores. Mas esquecer os crimes <br> que teve que cometer para salvar o povo de Tamlin, se tornou impossível. Entretanto, <br> uma guerra iminente aproxima-se e um mal muito mais perigoso o acompanha, <br> que com o tempo provará que 50 anos do reinado de Amaratha, torturas e terror, <br> escravidão e medo, eram apenas uma brincadeira de criança… Apenas um mísero <br> teste e prova do que eles eram capazes e podiam fazer se desejassem.
 
       </p>
 
@@ -119,7 +119,7 @@ const produtos = [
       <button><a class="fa-solid fa-square-plus"></a> Comprar</button>
     </li>
     </ul>
-  
+
     </section>
 </template>
 
@@ -203,7 +203,7 @@ section.produtos li {
   list-style: none;
 }
 section.produtos img {
-  width: 100;
+  width: 88%;
   height: 20vw;
 }
 section.produtos p.titulo {
@@ -213,16 +213,18 @@ section.produtos p.titulo {
 }
 section.produtos p.preco {
   font-family: bold;
+  font-size: 1vw;
   color: black;
 }
 section.produtos p.preco i {
-  margin: 0 0 0 8.5vw;
+  margin: 0 0 0 9.5vw;
+  font-size: 1.2vw;
 }
 section.produtos button{
   display: flex;
   justify-content: center;
-  margin: 2vw 0 0 0;
-  padding: 0.7vw 5vw 0.7vw 5vw;
+  margin: 1.7vw 0 0 0;
+  padding: 0.7vw 6vw 0.7vw 5vw;
   border-color: rgb(211, 34, 137);
   background: linear-gradient(rgb(211, 34, 137) , rgb(212, 71, 154));
   color: white;
