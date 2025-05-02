@@ -1,7 +1,9 @@
 <script setup>
-const produtos = [
+import { computed, ref } from 'vue';
+
+const produto = ref('');
+const produtos = ref([
     {
-        nome: 'livro 1',
         id: 1,
         titulo: 'lamina da assassina',
         autor: 'Sarah.J.Mass',
@@ -57,7 +59,21 @@ const produtos = [
         preco: 'R$134,93',
         capa: 'https://img.travessa.com.br/livro/GR/b2/b2696057-9310-4581-8a64-e060625ee84f.jpg',
     },
-];
+
+]);
+function adicionarProduto() {
+    produtos.value.push(produtos.value);
+    items.value = '';
+  }
+  function removerproduto(index) {
+    produtos.value.splice(index, 1);
+  }
+const carrinho = {
+    items: [
+   
+    ],
+};
+
 
 </script>
 
@@ -110,16 +126,30 @@ const produtos = [
     <ul >
     <li v-for="livro in produtos" :key="livro.id">
         <p v-for="imagem in produtos" :key="imagem.id"></p>
+
       <p ><img :src="livro.capa" alt="" width="200" height="200" ></p>
       <p>{{ capa }}</p>
       <p class="titulo"> {{ livro.titulo }}</p>
+
       <p v-for="autora in produtos" :key="autora.id"></p>
       <p class="autor"> {{ livro.autor }}</p>
+      
       <p v-for="numero in produtos" :key="numero.id"></p>
-      <p class="preco"> {{ livro.preco }} <i class="fa-solid fa-heart"></i> </p>
-      <button><a class="fa-solid fa-square-plus"></a> Comprar</button>
+      <p class="preco">{{ livro.preco }} <i class="fa-solid fa-heart"></i></p>
+       <button class="nada" @click="adicionarProduto" in items><a class="fa-solid fa-square-plus"></a> Comprar</button>
     </li>
     </ul>
+  
+    </section>
+    <section>
+
+      <ul>
+          <li v-for="(produtos, index) in produto" :key="index">
+            <p v-for="autora in produtos" > {{ autora }}</p>
+            <button @click="removerproduto(index)">Remover</button>
+            {{ items }} 
+          </li>
+        </ul>
     </section>
 </template>
 
@@ -217,7 +247,7 @@ section.produtos p.preco i {
   margin: 0 0 0 9.5vw;
   font-size: 1.2vw;
 }
-section.produtos button{
+section.produtos button.nada{
   display: flex;
   justify-content: center;
   margin: 1.7vw 0 0 0;
@@ -227,7 +257,7 @@ section.produtos button{
   color: white;
   border-radius: 0.5vw;
 }
-.produtos button a{
+.produtos button.nada a{
   padding: 0 0.5vw 0 0;
   font-size: 1vw;
 }
