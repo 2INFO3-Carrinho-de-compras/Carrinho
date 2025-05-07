@@ -1,7 +1,10 @@
 <script setup>
 import { reactive, ref } from 'vue';
 
-// const produto = ref('');
+const carrinho = reactive({
+  items: [],
+});
+
 const produtos = ref([
   {
     id: 1,
@@ -62,18 +65,12 @@ const produtos = ref([
 
 ]);
 
-const carrinho = reactive({
-  items: [],
-});
-
 function adicionarProduto(livro) {
   carrinho.items.push(livro);
-  // items.value = '';
 }
-function removerproduto(index) {
-  produtos.value.splice(index, 1);
-}
-
+//function removerProduto(index) {
+  //carrinho.items.value.splice(index, 1);
+//}
 </script>
 
 <template>
@@ -123,13 +120,11 @@ function removerproduto(index) {
         <img src="/img/livro.png" alt="livro" width="50" height="45">
         <p>Mais vendidos</p>
       </div>
-
     </section>
     <hr>
   </main>
 
   <section class="produtos">
-
     <ul>
       <li v-for="livro in produtos" :key="livro.id">
         <p v-for="imagem in produtos" :key="imagem.id"></p>
@@ -143,26 +138,16 @@ function removerproduto(index) {
 
         <p v-for="numero in produtos" :key="numero.id"></p>
         <p class="preco">{{ livro.preco }} <i class="fa-solid fa-heart"></i></p>
-        <button class="nada" @click="adicionarProduto(livro)" :class="listaCarrinho.some(items => items.id === livro.id) ? 'btn-adicionado' : 'btn-comprar'">
-          {{ listaCarrinho.some(items => items.id === livro.id) ? 'adicionado' : 'comprar' }}
-        </button>
+        <button class="botao" @click= "adicionarProduto" in produtos><a class="fa-solid fa-square-plus"></a> Comprar</button>
       </li>
     </ul>
 
   </section>
   <section>
-    <ul>
-      <!-- <li v-for="(produtos, index) in produto" :key="index"> -->
       <p v-for="livro in carrinho.items" :key="livro.id"> {{ livro }}</p>
-      <p v-for="autora in carrinho.items" :key="autora.id"></p>
-
-
+      <p>{{ items }}</p>
       <!-- <p><img :src="livro.capa" alt="" width="200" height="200" ></p> -->
       <!-- <p>{{ capa }}</p> -->
-
-
-      <!-- </li> -->
-    </ul>
   </section>
 </template>
 
@@ -280,7 +265,7 @@ section.produtos p.preco i {
   font-size: 1.2vw;
 }
 
-section.produtos button.nada {
+section.produtos button.botao {
   display: flex;
   justify-content: center;
   margin: 1.7vw 0 0 0;
@@ -291,7 +276,7 @@ section.produtos button.nada {
   border-radius: 0.5vw;
 }
 
-.produtos button.nada a {
+.produtos button.botao a {
   padding: 0 0.5vw 0 0;
   font-size: 1vw;
 }
