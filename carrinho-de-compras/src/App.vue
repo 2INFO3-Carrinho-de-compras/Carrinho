@@ -1,9 +1,9 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 
-const carrinho = reactive({
-  items: [],
-});
+const carrinho = ref([]);
+
+const mostrarTexto = ref(false);
 
 const produtos = ref([
   {
@@ -62,15 +62,22 @@ const produtos = ref([
     preco: 'R$134,93',
     capa: 'https://img.travessa.com.br/livro/GR/b2/b2696057-9310-4581-8a64-e060625ee84f.jpg',
   },
-
 ]);
 
-function adicionarProduto(livro) {
-  carrinho.items.push(livro);
+function adicionarProduto(book) {
+  carrinho.value.push(book);
 }
-//function removerProduto(index) {
-  //carrinho.items.value.splice(index, 1);
-//}
+
+function alternarTexto() {
+  mostrarTexto.value = !mostrarTexto.value;
+}
+
+function removerProduto(book) {
+  const index = carrinho.value.findIndex((p) => p.id === book.id);
+  if (index !== -1) {
+    carrinho.value.splice(index, 1);
+  }
+}
 </script>
 
 <template>
@@ -89,7 +96,6 @@ function adicionarProduto(livro) {
           acompanha, <br> que com o tempo provará que 50 anos do reinado de Amaratha, torturas e terror, <br> escravidão
           e medo, eram apenas uma brincadeira de criança… Apenas um mísero <br> teste e prova do que eles eram capazes e
           podiam fazer se desejassem.
-
         </p>
 
         <button class="pagina"> Acessar página do livro </button>
@@ -138,16 +144,20 @@ function adicionarProduto(livro) {
 
         <p v-for="numero in produtos" :key="numero.id"></p>
         <p class="preco">{{ livro.preco }} <i class="fa-solid fa-heart"></i></p>
-        <button class="botao" @click= "adicionarProduto" in produtos><a class="fa-solid fa-square-plus"></a> Comprar</button>
+        <button class="botao" @click= "adicionarProduto(livro)"><a class="fa-solid fa-square-plus"></a> Comprar</button>
       </li>
     </ul>
 
   </section>
   <section>
-      <p v-for="livro in carrinho.items" :key="livro.id"> {{ livro }}</p>
-      <p>{{ items }}</p>
-      <!-- <p><img :src="livro.capa" alt="" width="200" height="200" ></p> -->
-      <!-- <p>{{ capa }}</p> -->
+        <button @click="alternarTexto">Mostrar/Ocultar</button>
+          <ul v-if="mostrarTexto"><li v-for="book in carrinho" :key="book.id">
+            <p><img :src="book.capa" alt="" width="200" height="200"> {{ capa }}</p>
+            <p> {{ book.autor }}</p>
+            <p>{{ book.titulo }}</p>
+            <p>{{ book.preco }}</p>
+            <button class="botao" @click="removerProduto(book)">Remover</button>
+          </li></ul>
   </section>
 </template>
 
