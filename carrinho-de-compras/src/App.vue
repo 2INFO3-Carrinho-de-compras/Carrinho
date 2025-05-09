@@ -333,7 +333,7 @@ section.produtos button.botao {
 .produtos button.botao a {
    padding: 0 0.5vw 0 0;
    font-size: 1vw;
-
+}
 header {
     display: flex;
     border-bottom:2px solid rgb(211, 34, 137);
@@ -400,4 +400,4 @@ header p.titulo{
     color: rgb(211, 34, 137);
     border-left:2px solid rgb(211, 34, 137);
 }
-  </style>
+</style> 
