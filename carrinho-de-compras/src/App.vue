@@ -65,7 +65,12 @@ const produtos = ref([
 ]);
 
 function adicionarProduto(book) {
-  carrinho.value.push(book);
+  const existente = carrinho.value.find((p) => p.id === book.id);
+  if (existente) {
+    existente.quantidade++;
+  } else {
+    carrinho.value.push({ ...book, quantidade: 1 });
+  }
 }
 
 function alternarTexto(){
@@ -77,6 +82,26 @@ function removerProduto(book) {
   if (index !== -1) {
     carrinho.value.splice(index, 1);
   }
+}
+
+function incrementar(book){
+    book.quantidade++
+}
+
+function decrementar(book){
+    if(book.quantidade > 1){
+        book.quantidade--
+    }
+}
+
+function subPreco(book) {
+   return book.quantidade * parseFloat(book.preco.replace('R$', '').replace(',', '.'));
+}
+
+function totalCompra() {
+  return carrinho.value.reduce((total, item) => {
+    return total + subPreco(item);
+  }, 0);
 }
 </script>
 
@@ -92,7 +117,7 @@ function removerProduto(book) {
         <div class="pesquisa">
            <input type="text" class="pesquisa" placeholder="Pesquisar" >
            <a class="lupa">
-            <img src="/public/img/Icon.png" alt="lupa">
+            
            </a>
         </div>
 
@@ -113,7 +138,7 @@ function removerProduto(book) {
             </ul>
             <ul class="icones">
                 <li>
-                    <a class="fa-solid fa-square-plus"></a>
+                    <button @click="alternarTexto"><a class="fa-solid fa-square-plus"></a></button>
                 </li>
                 <li>
                     <i class="fa-solid fa-heart"></i>
@@ -125,6 +150,51 @@ function removerProduto(book) {
         </div>
     </header>
   <main>
+    <ul v-if="mostrarTexto">
+      <h1>Carrinho</h1>
+
+      <p v-if="carrinho.length === 0">Seu carrinho está vazio!</p>
+
+    <li v-else>
+      <p>
+        Título
+      </p>
+      <p>
+        Quantidade
+      </p>
+      <p>
+        Subtotal
+      </p>
+      <li v-for="book in carrinho" :key="book.id">
+        <p><img :src="book.capa" alt="" width="120" height="150"> {{ capa }}</p>
+        <p> {{ book.autor }}</p>
+        <p>{{ book.titulo }}</p>
+        <p>{{ book.preco }}</p>
+        <button @click="decrementar(book)">-</button>
+        {{ book.quantidade }}
+        <button @click="incrementar(book)">+</button>
+        <p>Subtotal: R$ {{ subPreco(book).toFixed(2) }}</p>
+        <button class="botao" @click="removerProduto(book)">Remover</button>
+      </li>
+      <div>
+        <ul>
+          Total da compra:
+          <li>
+              Produtos: R$ {{ totalCompra().toFixed(2) }}
+          </li>
+          <li>
+              Frete: R$ 0.00
+          </li>
+          <li>
+              Total: R$ {{ totalCompra().toFixed(2) }}
+          </li>
+          <button>Ir para o pagamento</button>
+        </ul>
+      </div>
+    </li>
+    </ul>
+
+<ul v-else>
     <section>
       <div class="conteudo">
         <button class="autor"> Autor de Abril </button>
@@ -143,9 +213,7 @@ function removerProduto(book) {
 
         <button class="pagina"> Acessar página do livro </button>
       </div>
-
       <div class="foto">
-        <img src="/img/capa.jpeg" alt="capa" width="470" height="620">
       </div>
 
     </section>
@@ -154,24 +222,18 @@ function removerProduto(book) {
 
     <section class="opcoes">
       <div>
-        <img src="/img/caminhao.png" alt="caminhao" width="50" height="45">
         <p>Frete grátis para SC</p>
-
       </div>
       <hr>
       <div>
-        <img src="/img/estrela.png" alt="estrela" width="50" height="45">
         <p>Livros recomendados</p>
-
       </div>
       <hr>
       <div>
-        <img src="/img/livro.png" alt="livro" width="50" height="45">
         <p>Mais vendidos</p>
       </div>
     </section>
     <hr>
-  </main>
 
   <section class="produtos">
     <ul>
@@ -190,21 +252,85 @@ function removerProduto(book) {
         <button class="botao" @click= "adicionarProduto(livro)"><a class="fa-solid fa-square-plus"></a> Comprar</button>
       </li>
     </ul>
-
   </section>
-  <section>
-        <button @click="alternarTexto">Mostrar/Ocultar</button>
-          <ul v-if="mostrarTexto"><li v-for="book in carrinho" :key="book.id">
-            <p><img :src="book.capa" alt="" width="200" height="200"> {{ capa }}</p>
-            <p> {{ book.autor }}</p>
-            <p>{{ book.titulo }}</p>
-            <p>{{ book.preco }}</p>
-            <button class="botao" @click="removerProduto(book)">Remover</button>
-          </li></ul>
-  </section>
+</ul>
+</main>
 </template>
 
 <style scoped>
+/*=============================
+        FEAT-1 - HEADER
+=============================*/
+header {
+    display: flex;
+    border-bottom:2px solid rgb(211, 34, 137);
+}
+h1{
+    padding: 0 10px 0 0;
+    font-size: 1.5vw;
+    margin: 1.5vw 0 1.5vw 8vw;
+    color: black;
+}
+.pesquisa{
+    display: flex;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(252, 225, 240);
+    margin: 1vw;
+}
+.pesquisa input{
+    padding: 5px 10vw 5px 1vw;
+}
+.pesquisa a.lupa{
+  padding: 5px 1vw 0 0;
+  margin: 1.3vw 0 1vw 0;
+}
+div.topo{
+    display: flex;
+}
+div.topo ul.botoes{
+    display: flex;
+}
+div.topo ul.icones{
+    display: flex;
+}
+div.topo ul.botoes li {
+    margin: 2vw 2vw 1vw 1vw;
+    list-style: none;
+}
+.icones li{
+    margin: 2vw 1vw 1vw 0;
+    list-style: none;
+}
+.icones li i{
+    border-left:2px solid rgb(211, 34, 137);
+    color: rgb(211, 34, 137);
+    font-size: 1.3vw;
+    padding: 0 0 0 20px;
+}
+.icones li a{
+    color: rgb(211, 34, 137);
+    font-size: 1.3vw;
+}
+header p {
+    display: flex;
+    margin: 1vw 0 0 0;
+}
+a {
+    color: gray;
+    text-decoration: none;
+}
+header p.titulo{
+    padding: 0 0 0 10px;
+    font-size: 1vw;
+    margin: 1.5vw 8vw 1vw 0;
+    color: rgb(211, 34, 137);
+    border-left:2px solid rgb(211, 34, 137);
+}
+
+/*=========================
+     FEAT-2 - CONTEÚDO
+========================*/
 
 hr {
   border-color: rgb(211, 34, 137);
@@ -319,7 +445,7 @@ section.produtos p.preco i {
   font-size: 1.2vw;
 }
 
-section.produtos button.botao {
+ul li button.botao {
   display: flex;
   justify-content: center;
   margin: 1.7vw 0 0 0;
@@ -333,71 +459,12 @@ section.produtos button.botao {
 .produtos button.botao a {
    padding: 0 0.5vw 0 0;
    font-size: 1vw;
+   color: white;
 }
-header {
-    display: flex;
-    border-bottom:2px solid rgb(211, 34, 137);
-}
-h1{
-    padding: 0 10px 0 0;
-    font-size: 1.5vw;
-    margin: 1.5vw 0 1.5vw 8vw;
-    color: black;
-}
-.pesquisa{
-    display: flex;
-    border-radius: 20px;
-    border: none;
-    background-color: rgb(252, 225, 240);
-    margin: 1vw;
-}
-.pesquisa input{
-    padding: 5px 10vw 5px 1vw;
-}
-.pesquisa a.lupa{
-  padding: 5px 1vw 0 0;
-  margin: 1.3vw 0 1vw 0;
-}
-div.topo{
-    display: flex;
-}
-div.topo ul.botoes{
-    display: flex;
-}
-div.topo ul.icones{
-    display: flex;
-}
-div.topo ul.botoes li {
-    margin: 2vw 2vw 1vw 1vw;
-    list-style: none;
-}
-.icones li{
-    margin: 2vw 1vw 1vw 0;
-    list-style: none;
-}
-.icones li i{
-    border-left:2px solid rgb(211, 34, 137);
-    color: rgb(211, 34, 137);
-    font-size: 1.3vw;
-    padding: 0 0 0 20px;
-}
-.icones li a{
-    color: rgb(211, 34, 137);
-    font-size: 1.3vw;
-}
-header p {
-    display: flex;
-    margin: 1vw 0 0 0;
-}
-a {
-    color: gray;
-    text-decoration: none;
-}
-header p.titulo{
-    padding: 0 0 0 10px;
-    font-size: 1vw;
-    margin: 1.5vw 8vw 1vw 0;
-    color: rgb(211, 34, 137);
-    border-left:2px solid rgb(211, 34, 137);
-}
+
+/*================================
+        FEAT-2 - CARRINHO
+================================*/
+
+
 </style> 
