@@ -391,10 +391,6 @@ hr {
   border-color: rgb(211, 34, 137);
 }
 
-i {
-  color: rgb(211, 34, 137);
-}
-
 section {
   display: flex;
   justify-content: space-around;
@@ -527,6 +523,7 @@ ul li button.botao {
 =============================*/
 
 footer{
+  margin: 10vw 0 0 0;
     background-color: rgb(211, 34, 137);
     color: white;
 }
