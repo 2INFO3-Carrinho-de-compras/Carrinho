@@ -3,12 +3,16 @@ import { ref } from 'vue';
 
 const carrinho = ref([]);
 
+const curtidos = ref([]);
+
 const mostrarTexto = ref(false);
+
+const mostrarPagina = ref(false);
 
 const produtos = ref([
   {
     id: 1,
-    titulo: 'lamina da assassina',
+    titulo: 'Lamina da assassina',
     autor: 'Sarah.J.Mass',
     preco: 'R$82,46',
     capa: 'https://aishando.home.blog/wp-content/uploads/2023/08/7-1.jpg',
@@ -103,6 +107,24 @@ function totalCompra() {
     return total + subPreco(item);
   }, 0);
 }
+
+function adicionarCurtidos(book) {
+  const existente = curtidos.value.find((p) => p.id === book.id);
+  if (!existente) {
+    curtidos.value.push(book);
+  }
+}
+
+function removerCurtidos(book) {
+  const index = curtidos.value.findIndex((p) => p.id === book.id);
+  if (index !== -1) {
+    curtidos.value.splice(index, 1);
+  }
+}
+
+function alternarPagina(){
+  mostrarPagina.value = !mostrarPagina.value;
+}
 </script>
 
 <template>
@@ -117,7 +139,7 @@ function totalCompra() {
         <div class="pesquisa">
            <input type="text" class="pesquisa" placeholder="Pesquisar" >
            <a class="lupa">
-            
+            <img src="/img/Icon.png" alt="lupa">
            </a>
         </div>
 
@@ -141,7 +163,7 @@ function totalCompra() {
                     <button @click="alternarTexto"><a class="fa-solid fa-square-plus"></a></button>
                 </li>
                 <li>
-                    <i class="fa-solid fa-heart"></i>
+                    <button @click="alternarPagina"><i class="fa-solid fa-heart"></i></button>
                 </li>
                 <li>
                     <i class="fa-solid fa-user"></i>
@@ -149,36 +171,71 @@ function totalCompra() {
             </ul>
         </div>
     </header>
+
   <main>
-    <ul v-if="mostrarTexto">
+    <ul v-if="mostrarPagina" class="paginaFavorito">
+      <h1>Favoritos</h1>
+
+      <p v-if="curtidos.length === 0">Você ainda não tem favoritos!</p>
+
+      <li v-else>
+      <li v-for="book in curtidos" :key="book.id">
+      <div class="paginaCurtido">
+        <p><img :src="book.capa" alt="" width="120" height="150"> {{ capa }}</p>
+        <div class="infoLivro">
+            <p class="tituloCarrinho">{{ book.titulo }}</p>
+            <p> {{ book.autor }}</p>
+            <p class="precoCarrinho">{{ book.preco }}</p>
+        </div>
+         <button class="remover2" @click="removerCurtidos(book)">Remover</button>
+      </div>
+      </li>
+      </li>
+    </ul>
+
+    <ul v-if="mostrarTexto" class="paginaCarrinho">
       <h1>Carrinho</h1>
 
       <p v-if="carrinho.length === 0">Seu carrinho está vazio!</p>
 
-    <li v-else>
-      <p>
-        Título
-      </p>
-      <p>
-        Quantidade
-      </p>
-      <p>
-        Subtotal
-      </p>
-      <li v-for="book in carrinho" :key="book.id">
-        <p><img :src="book.capa" alt="" width="120" height="150"> {{ capa }}</p>
-        <p> {{ book.autor }}</p>
-        <p>{{ book.titulo }}</p>
-        <p>{{ book.preco }}</p>
-        <button @click="decrementar(book)">-</button>
-        {{ book.quantidade }}
-        <button @click="incrementar(book)">+</button>
-        <p>Subtotal: R$ {{ subPreco(book).toFixed(2) }}</p>
-        <button class="botao" @click="removerProduto(book)">Remover</button>
-      </li>
-      <div>
+    <li v-else class="informacao">
+      <div class="titulos">
+        <p class="titulo2">
+          Título
+        </p>
+        <p>
+          Quantidade
+        </p>
+        <p>
+          Subtotal
+        </p>
+      </div>
+
+          <li v-for="book in carrinho" :key="book.id">
+            <div class="informacoes">
+                <p><img :src="book.capa" alt="" width="120" height="150"> {{ capa }}</p>
+
+                <div class="infoLivro">
+                    <p class="tituloCarrinho">{{ book.titulo }}</p>
+                    <p class="autorCarrinho"> {{ book.autor }}</p>
+                    <p class="precoCarrinho">{{ book.preco }}</p>
+                </div>
+
+                <div class="contador">
+                    <button class="botoesContador" @click="decrementar(book)">-</button>
+                    {{ book.quantidade }}
+                    <button class="botoesContador" @click="incrementar(book)">+</button>
+                    
+                    <button class="remover" @click="removerProduto(book)">Remover</button>
+                </div>
+                <p class="subPreco">R$ {{ subPreco(book).toFixed(2) }}</p>
+            </div>
+          </li>
+    </li>
+
+      <div class="total">
         <ul>
-          Total da compra:
+          <h2>Total da compra:</h2>
           <li>
               Produtos: R$ {{ totalCompra().toFixed(2) }}
           </li>
@@ -191,10 +248,9 @@ function totalCompra() {
           <button>Ir para o pagamento</button>
         </ul>
       </div>
-    </li>
-    </ul>
+</ul>
 
-<ul v-else>
+<ul v-if="!mostrarPagina && !mostrarTexto">
     <section>
       <div class="conteudo">
         <button class="autor"> Autor de Abril </button>
@@ -214,6 +270,7 @@ function totalCompra() {
         <button class="pagina"> Acessar página do livro </button>
       </div>
       <div class="foto">
+        <img src="/img/capa.jpeg" alt="capa" width="470" height="620">
       </div>
 
     </section>
@@ -222,15 +279,15 @@ function totalCompra() {
 
     <section class="opcoes">
       <div>
-        <p>Frete grátis para SC</p>
+        <img src="/img/caminhao.png" alt="caminhao" width="50" height="45"><p>Frete grátis para SC</p>
       </div>
       <hr>
       <div>
-        <p>Livros recomendados</p>
+        <img src="/img/estrela.png" alt="estrela" width="50" height="45"><p>Livros recomendados</p>
       </div>
       <hr>
       <div>
-        <p>Mais vendidos</p>
+        <img src="/img/livro.png" alt="livro" width="50" height="45"><p>Mais vendidos</p>
       </div>
     </section>
     <hr>
@@ -238,7 +295,6 @@ function totalCompra() {
   <section class="produtos">
     <ul>
       <li v-for="livro in produtos" :key="livro.id">
-        <p v-for="imagem in produtos" :key="imagem.id"></p>
 
         <p><img :src="livro.capa" alt="" width="200" height="200"></p>
         <p>{{ capa }}</p>
@@ -248,8 +304,21 @@ function totalCompra() {
         <p class="autor"> {{ livro.autor }}</p>
 
         <p v-for="numero in produtos" :key="numero.id"></p>
-        <p class="preco">{{ livro.preco }} <i class="fa-solid fa-heart"></i></p>
-        <button class="botao" @click= "adicionarProduto(livro)"><a class="fa-solid fa-square-plus"></a> Comprar</button>
+        <p class="preco">{{ livro.preco }}</p>
+
+        <div v-if="curtidos.find(p => p.id === livro.id)">
+          <button class="curtido"><i class="fa-solid fa-heart"></i></button>
+        </div>
+        <div v-else>
+          <button class="curtir" @click="adicionarCurtidos(livro)"><i class="fa-solid fa-heart"></i></button>
+        </div>
+
+        <div v-if="carrinho.find(p => p.id === livro.id)">
+          <button class="botao"> <a class="fa-solid fa-square-plus"></a> Comprado</button>
+        </div>
+        <div v-else>
+          <button class="comprar" @click="adicionarProduto(livro)"><a class="fa-solid fa-square-plus"></a> Comprar</button>
+        </div>
       </li>
     </ul>
   </section>
@@ -332,6 +401,7 @@ h1{
     border: none;
     background-color: rgb(252, 225, 240);
     margin: 1vw;
+    cursor: pointer;
 }
 .pesquisa input{
     padding: 5px 10vw 5px 1vw;
@@ -366,6 +436,11 @@ div.topo ul.botoes li {
 .icones li a{
     color: rgb(211, 34, 137);
     font-size: 1.3vw;
+}
+.icones button{
+  border: none;
+  background-color: white;
+  cursor: pointer;
 }
 header p {
     display: flex;
@@ -403,6 +478,7 @@ section div.conteudo button.autor {
   border-color: rgb(211, 34, 137);
   background-color: white;
   color: rgb(211, 34, 137);
+  cursor: pointer;
 }
 
 section div.conteudo h2 {
@@ -424,6 +500,7 @@ section div.conteudo button.pagina {
   padding: 1vw 2vw 1vw 2vw;
   background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
   color: white;
+  cursor: pointer;
 }
 
 section div.foto {
@@ -462,7 +539,6 @@ section.produtos ul {
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 2vw;
-
 }
 
 section.produtos li {
@@ -479,21 +555,16 @@ section.produtos img {
   height: 20vw;
 }
 
-section.produtos p.titulo {
+p.titulo {
   font-size: 1.5vw;
   color: black;
   font-family: bold;
 }
 
-section.produtos p.preco {
+p.preco {
   font-family: bold;
-  font-size: 1vw;
-  color: black;
-}
-
-section.produtos p.preco i {
-  margin: 0 0 0 9.5vw;
   font-size: 1.2vw;
+  color: black;
 }
 
 ul li button.botao {
@@ -502,9 +573,10 @@ ul li button.botao {
   margin: 1.7vw 0 0 0;
   padding: 0.7vw 6vw 0.7vw 6vw;
   border: none;
-  background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
+  background: linear-gradient(rgb(211, 34, 43), rgb(212, 71, 90));
   color: white;
   border-radius: 0.5vw;
+  cursor: pointer;
 }
 
 .produtos button.botao a {
@@ -513,11 +585,192 @@ ul li button.botao {
    color: white;
 }
 
+ul li button.comprar {
+  display: flex;
+  justify-content: center;
+  margin: 1.7vw 0 0 0;
+  padding: 0.7vw 6vw 0.7vw 6vw;
+  border: none;
+  background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
+  color: white;
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
+
+.produtos button.comprar a {
+   padding: 0 0.5vw 0 0;
+   font-size: 1vw;
+   color: white;
+}
+
+ul li button.curtir {
+  display: flex;
+  justify-content: center;
+  margin: 1vw 0 0 0;
+  padding: 0.3vw 0.7vw 0.3vw 0.7vw;
+  border: none;
+  background-color: rgb(255, 169, 219);
+  color: rgb(194, 16, 120);
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
+
+ul li button.curtido {
+  display: flex;
+  justify-content: center;
+  margin: 1vw 0 0 0;
+  padding: 0.3vw 0.7vw 0.3vw 0.7vw;
+  border: none;
+  background-color: rgb(255, 131, 137);
+  color: rgb(184, 7, 16);
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
 /*================================
         FEAT-2 - CARRINHO
 ================================*/
+.remover {
+  display: flex;
+  justify-content: center;
+  margin: 1vw 0 0 0;
+  padding: 0.2vw 0.5vw 0.2vw 0.5vw;
+  border: none;
+  background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
+  color: white;
+  border-radius: 0.3vw;
+  cursor: pointer;
+}
 
+.botoesContador{
+  border: none;
+  background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
+  color: white;
+  border-radius: 0.3vw;
+  cursor: pointer;
+  padding: 0.2vw 0.5vw 0.2vw 0.5vw;
+}
 
+.titulos{
+  display: flex;
+  border-bottom: 2px solid rgb(211, 34, 137);
+  margin: 0 5vw 0 5vw;
+}
+.titulos p{
+  margin: 2vw 5vw 2vw 15vw;
+  font-size: 1.3vw;
+  font-weight: 500;
+}
+.titulos p.titulo2{
+  margin: 2vw 25vw 2vw 3vw;
+  font-size: 1.3vw;
+  font-weight: 500;
+}
+
+p.tituloCarrinho {
+  font-size: 1.5vw;
+  color: black;
+  font-family: bold;
+}
+
+p.precoCarrinho {
+  font-family: bold;
+  font-size: 1.2vw;
+  color: black;
+}
+
+.informacoes{
+  display: flex;
+  margin: 2vw 5vw 2vw 3vw;
+}
+.informacao{
+  list-style: none;
+}
+.paginaCarrinho h1{
+  font-size: 2vw;
+  font-weight: 500;
+  color: rgb(211, 34, 137);
+  margin: 6vw 0 4vw 8vw;
+}
+
+.infoLivro{
+  margin: 0 0 0 2vw;
+}
+
+.contador{
+  margin: 2vw 0 0 25vw;
+}
+
+.subPreco{
+  margin: 2vw 0 0 21.5vw;
+  font-size: 1.5vw;
+  font-weight: 540;
+  font-family: bold;
+}
+
+.total{
+  border: 2px solid rgb(66, 66, 66);
+  margin: 10vw 65vw 2vw 5vw;
+}
+
+.total h2{
+  font-size: 1.3vw;
+  font-weight: 500;
+  margin: 2vw 3vw 0 0;
+}
+
+.total li{
+  border-bottom: 1px solid gray;
+  list-style: none;
+  margin: 2vw 3vw 0 0;
+  font-weight: 500;
+}
+
+.total button{
+  margin: 2vw 2vw 1.5vw 4vw;
+  border: none;
+  background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
+  color: white;
+  border-radius: 0.2vw;
+  cursor: pointer;
+  padding: 0.7vw 2vw 0.7vw 2vw;
+}
+
+.informacao li{
+  border-bottom: 1px solid gray;
+  margin: 2vw 5vw 0 5vw;
+}
+
+.paginaFavorito{
+  list-style: none;
+}
+
+.paginaCurtido{
+  display: flex;
+  margin: 2vw 5vw 2vw 3vw;
+}
+
+.paginaFavorito h1{
+  font-size: 2vw;
+  font-weight: 500;
+  color: rgb(211, 34, 137);
+  margin: 6vw 0 4vw 8vw;
+}
+
+.paginaFavorito li{
+  border-bottom: 1px solid gray;
+  margin: 2vw 5vw 0 2.5vw;
+}
+.remover2 {
+  display: flex;
+  justify-content: center;
+  margin: 5vw 2vw 5vw 40vw;
+  padding: 0.7vw 5vw 0.7vw 5vw;
+  border: none;
+  background: linear-gradient(rgb(211, 34, 137), rgb(212, 71, 154));
+  color: white;
+  border-radius: 0.3vw;
+  cursor: pointer;
+}
 /*===============================
         FEAT-3 - FOOTER
 =============================*/
